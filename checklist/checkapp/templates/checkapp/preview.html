@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-11">
+            <div class="card bg-color">
+                <div class="card-body mt-0">
+                    
+                        <b>ASHOKA BUILDCON LTD. ASHOKA HOUSE, ASHOKA MARG , ASHOK NAGAR, NASHIK-422011</b><br>
+                        
+                        <b>Execution & Quality Assurance structures Work Instruction</b>
+                        <br>
+                        <b>Doc No: WI/CO/DO/PR/EQA(STR)/32   |   REF: QMS 8.5.1,8.5.5  |  PAGE 1 OF 1</b><br>
+                        <b>Issue No : 02    |    Issue Date: 01st August 2018</b><br>
+                        <b>Rev No : 01    |    Rev Date: 01st August 2018</b><br>
+                        <!-- <b>Title :  Check for Structures </b><br> -->
+                </div>
+            </div>
+            </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center"> <!-- Center the entire content -->
+        <div class="col-md-11"> <!-- Adjust the column width as needed -->
+            <div class="card bg-color">
+                <div class="card-body">
+                    <div class="row justify-content-center"> 
+                        <b>DOC-NUMBER :: {{checklistheader.Doc_ID}}</b>
+                    </div>
+                    <div class="row justify-content-center"> 
+                        <b>CHECKLIST : </b>{{checklistheader.CheckList_ID}}
+                    </div>
+                    <hr class="custom-hr">
+                    <div class="row">
+                        <div class="col-md-6"> <!-- Use "col-md-6" for half-width column on medium screens and larger -->
+                            <b>PROJECT NAME : </b>{{checklistheader.Project_Name}}
+                        </div>
+                        <div class="col-md-6"> <!-- Use "col-md-6" for half-width column on medium screens and larger -->
+                            <b>SITE NAME : </b>{{checklistheader.Site_Name}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"> <!-- Use "col-md-12" for full-width column on medium screens and larger -->
+                            <b>NAME OF CONTRACTOR : </b>{{checklistheader.Contractor}}
+                        </div>
+                        <div class="col-md-6"> <!-- Use "col-md-12" for full-width column on medium screens and larger -->
+                            <b>NAME OF ABL STAFF :(checklist created by) </b>{{checklistheader.Name_Of_ABLStaff}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"> <!-- Use "col-md-12" for full-width column on medium screens and larger -->
+                            <b>INSPECTION DATE : </b>{{checklistheader.inspection_Start_Date}}
+                        </div>
+                        <div class="col-md-6"> <!-- Use "col-md-12" for full-width column on medium screens and larger -->
+                            <b>LOCATION MCW/SR(RHS/LHS/BHS) </b>{{checklistheader.Location}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"> <!-- Use "col-md-12" for full-width column on medium screens and larger -->
+                            <b>STRUCTURAL ELEMENT : </b>{{checklistheader.Structural_Element}}
+                        </div>
+                        <div class="col-md-6"> <!-- Use "col-md-12" for full-width column on medium screens and larger -->
+                            <b>CHAINAGE </b>{{checklistheader.Chainage}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-11">
+    <!-- Display the Bootstrap Card -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h2>Checklist Details</h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive"> <!-- Add this to make the table responsive on small screens -->
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Checklist Item ID</th>
+                            <th scope="col">Site Engineer Status</th>
+                            <th scope="col">Site Engineer Comment</th>
+                            <th scope="col">Site DH EQA Status</th>
+                            <th scope="col">Site DH EQA Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item, Enggstatus, Enggcomment, DHStatus, DHComment in checklist_detail_preview %}
+                        <tr>
+                            <td>{{ item }}</td>
+                            <td>{{ Enggstatus }}</td>
+                            <td>{{ Enggcomment }}</td>
+                            <td>{{ DHStatus }}</td>
+                            <td>{{ DHComment }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{checklistheader}}
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</body>
+</html>

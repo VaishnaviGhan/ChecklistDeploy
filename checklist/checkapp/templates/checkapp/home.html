@@ -1,0 +1,21 @@
+{% extends "checkapp/base.html" %}
+{% load static %}
+{% block image%}
+<div class="slider-frame">
+ <div class="slide-images">
+     <div class="img-container">
+         <img class="vaishu" src="{% static 'checkapp/images/9069.jpg' %}">
+     </div>
+ </div>
+</div>
+{% endblock %}
+{% block formcontent %}
+{% if messages %}
+<div class="alert alert-success mt-3" role="alert">
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
+

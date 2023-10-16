@@ -1,0 +1,109 @@
+
+
+{% extends "checkapp/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} 
+   {{ page_title }}
+{% endblock title %}
+
+{% block formcontent %}
+<!-- <div class='h-25 w-50 jumbotron' style="margin-left: auto; margin-right:auto;margin-top:25px;"> -->
+  <!-- <div class="text-center"><h2 style="color:darkcyan;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> Add User </h2></div> -->
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-5">
+            <h4 class="text-center alert alert-info">Add user</h4>
+  <form method="POST"  action="{% url 'addUser' %}" >
+    
+        {% csrf_token %}
+        <div class="col-12 mx-left">
+            <div class="row">
+                <div class="col-md-12 text-left">
+                    {{ form.username|as_crispy_field }}
+                </div>
+                <div class="col-md-12 text-left">
+                    {{ form.password1|as_crispy_field }}
+                </div>
+                <div class="col-md-12 text-left">
+                    {{ form.password2|as_crispy_field }}
+                </div>
+                <div class="col-md-12 text-left">
+                    {{ form.is_superuser|as_crispy_field }}
+                </div>
+                <div class="col-md-12 text-left">
+                    {{ form.last_name|as_crispy_field }}
+                </div>
+                <div class="col-md-12 text-left">
+                    {{ form.email|as_crispy_field }}
+                </div>
+                <div class="col-md-12 text-left">
+                    {{ form.is_staff|as_crispy_field }}
+                </div>
+                <div class="col-md-12 text-left">
+                    {{ form.is_active|as_crispy_field }}
+                </div>
+                <div class="col-md-12 text-left">
+                    {{ form.is_SiteEngineer|as_crispy_field }}
+                </div>
+                <div class="col-md-12 text-left">
+                    {{ form.is_DHEQA|as_crispy_field }}
+                </div>
+                <div class="col-md-12 text-left">
+                    {{ form.is_ProjectQA|as_crispy_field }}
+                </div>
+                <div class="col-md-12 text-left">
+                    {{ form.is_ProjectHead|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-left: 120px;">Submit</button>
+        
+    </form>
+        </div>
+    <div class="col-sm-7">
+        <h4 class="text-center alert alert-info">Show users</h4>
+        {% if users %}
+        <h4>Table Data</h4>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">username</th>
+                <th scope="col">Action</th>
+              
+              </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+              <tr>
+                <th scope="row">{{user.User_ID}}</th>
+                <td>{{user.username}}</td>
+                <td>
+                    <a href="{% url 'edit_user' user.User_ID %}" class="">Edit</a>
+                    <form action="{% url 'delete_user' user.User_ID %}" method="post" class="d-inline">{% csrf_token %}
+                        <input type="submit" class=""
+                        value="Delete">
+                    </form>
+                </td>
+              </tr>
+              {% endfor %}
+             
+            </tbody>
+          </table>
+        {% else %}
+        <h4 class="text-center alert alert-warning">No user available</h4>
+        {% endif %}
+    </div>
+
+   
+    {% if messages %}
+        <div class="alert alert-success mt-3" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

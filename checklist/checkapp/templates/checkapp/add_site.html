@@ -1,0 +1,79 @@
+
+{% extends "checkapp/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} 
+   {{ page_title }}
+{% endblock title %}
+
+{% block formcontent %}
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-5">
+            <h4 class="text-center alert alert-info">Add site</h4>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="col-12 mx-auto">
+            {{ form | crispy }}
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-left: 17px;">Submit</button>
+    </form>
+      
+            <hr>
+        </div>
+    </div>
+  
+    {% if messages %}
+        <div class="alert alert-success mt-3" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<div class="container-fluid">
+<div class="row">
+    <div class="col-sm-5">
+        <h4 class="text-center alert alert-info" style="font-size: 14px;">Show sites</h4>
+        {% if sites %}
+        <h4>Table Data</h4>
+        <table class="table table-hover" style="font-size: 12px;">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Site_Name</th>
+                <th scope="col">Project_Name</th>
+                <th scope="col">Action</th>
+              
+              </tr>
+            </thead>
+            <tbody>
+                {% for site in sites %}
+              <tr>
+                <th scope="row">{{site.Site_ID}}</th>
+                <td>{{site.Site_Name}}</td>
+                <td>{{site.Project_Name}}</td>
+                <td>
+                    <a href="{% url 'edit_site' site.Site_ID %}" class="">Edit</a>
+                    <form action="{% url 'delete_site' site.Site_ID %}" method="post"  class="d-inline">{% csrf_token %}
+                        <input type="submit" class=""
+                        value="Delete">
+                    </form>
+                </td>
+              </tr>
+              {% endfor %}
+             
+            </tbody>
+          </table>
+        {% else %}
+        <h4 class="text-center alert alert-warning" style="font-size: 14px;">No sites available</h4>
+        {% endif %}
+    </div>
+
+   
+    </div>
+</div>
+</div>
+{% endblock %}
+ 
